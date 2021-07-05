@@ -1,0 +1,6 @@
+﻿  Source.cpp
+D:\#007#\CURRENT STUDY\Algorithms\Astarsearch\AstarSearch\AstarSearch\Source.cpp(81,32): warning C4018:  '<': signed/unsigned mismatch
+D:\#007#\CURRENT STUDY\Algorithms\Astarsearch\AstarSearch\AstarSearch\Source.cpp(82,32): warning C4018:  '<': signed/unsigned mismatch
+D:\#007#\CURRENT STUDY\Algorithms\Astarsearch\AstarSearch\AstarSearch\Source.cpp(176,20): warning C4018:  '<': signed/unsigned mismatch
+D:\#007#\CURRENT STUDY\Algorithms\Astarsearch\AstarSearch\AstarSearch\Source.cpp(177,21): warning C4018:  '<': signed/unsigned mismatch
+  AstarSearch.vcxproj -> D:\#007#\CURRENT STUDY\Algorithms\Astarsearch\AstarSearch\Debug\AstarSearch.exe
