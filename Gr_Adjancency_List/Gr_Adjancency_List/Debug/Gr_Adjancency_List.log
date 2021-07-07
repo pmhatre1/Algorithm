@@ -1,3 +1,0 @@
-﻿  Source.cpp
-C:\Users\mhatr\source\repos\Gr_Adjancency_List\Gr_Adjancency_List\Source.cpp(25,1): warning C4326:  return type of 'main' should be 'int' instead of 'void'
-  Gr_Adjancency_List.vcxproj -> C:\Users\mhatr\source\repos\Gr_Adjancency_List\Debug\Gr_Adjancency_List.exe
