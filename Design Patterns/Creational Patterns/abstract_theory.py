@@ -1,6 +1,20 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
 
+"""
+        ----------------------ConcreteFactory1
+        |         |             + createProduct_A()
+        |         |             + createProduct_B()
+    Concrete   Concrete 
+    ProductA1  ProductB1              |
+        |         |                   |
+        |         |                   |------------------------Client
+     Abstract   Abstract              |                        +someOperation()
+     ProductA   ProductB              |
+                                AbstractFactory
+                                 <<interface>>                   
+"""  
+
 class AbstractFactory(ABC):
 
     def CreateProduct_A(self) -> AbstractProductA:
