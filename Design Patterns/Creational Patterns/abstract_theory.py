@@ -1,5 +1,5 @@
 from __future__ import annotations
-from abc import ABC
+from abc import ABC, abstractclassmethod
 
 """
         ----------------------ConcreteFactory1
@@ -88,14 +88,10 @@ def client_code(factory:AbstractFactory)->None:
     print(f"{product_b.useful_function_b()}")
     print(f"{product_b.another_useful_function(product_a)}",end ="")
 
-if __name__ == "__main__":
+print("Client:Testing the client code with the first factory type:")
+client_code(ConcreteFactory1())
 
-    print("Client:Testing the client code with the first factory type:")
-    client_code(ConcreteFactory1())
+print("\n")
 
-    print("\n")
-
-    print("Client:Testing the same client code with the second factory type:")
-    client_code(ConcreteFactory2())
-
-
+print("Client:Testing the same client code with the second factory type:")
+client_code(ConcreteFactory2())

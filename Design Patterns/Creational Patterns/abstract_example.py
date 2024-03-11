@@ -15,87 +15,156 @@ from abc import ABC
                                  <<interface>>                   
 """  
 
+###########################################################################################
+"""
+ABSTRACT CLASS FOR AbstractFactory
+"""
+
 class AbstractFactory(ABC):
 
-    def CreateProduct_A(self) -> AbstractProductA:
+    def CreateChair(self)->AbstractChair:
         pass
 
-    def CreateProduct_B(self) -> AbstractProductB:
+    def CreateCoffeeTable(self)->AbstractCoffeeTable:
         pass
 
-class ConcreteFactory1(AbstractFactory):
-
-    def CreateProduct_A(self)-> AbstractProductA:
-        return ConcreteProduct_A1()
-    
-    def CreateProduct_B(self)-> AbstractProductB:
-        return ConcreteProduct_B1()
-
-class ConcreteFactory2(AbstractFactory):
-
-    def CreateProduct_A(self)-> AbstractProductA:
-        return ConcreteProduct_A2()
-    
-    def CreateProduct_B(self)-> AbstractProductB:
-        return ConcreteProduct_B2()
-
-class AbstractProductA(ABC):
-
-    def useful_function_a(self) -> str:
+    def CreateSofa(self)->AbstractSofa:
         pass
 
-class ConcreteProduct_A1(AbstractProductA):
-    
-    def useful_function_a(self)-> str:
-        return "The result of the product A1."
-    
-class ConcreteProduct_A2(AbstractProductA):
+###########################################################################################
 
-    def useful_function_a(self)->str:
-        return "The result of the product A2."
-    
-class AbstractProductB(ABC):
+"""
+Concrete CLASS FOR ConcreteFactory
+"""
 
-    def useful_function_b(self) -> str:
+class VictorianFurnitureFactory(AbstractFactory):
+
+    def CreateChair(self) -> AbstractChair:
+        return VictorianChairProduct()
+    
+    def CreateCoffeeTable(self) -> AbstractCoffeeTable:
+        return VictorianCoffeeProduct()
+    
+    def CreateSofa(self) -> AbstractSofa:
+        return VictorianCreateSofa()
+    
+class ModernFurnitureFactory(AbstractFactory):
+    def CreateChair(self) -> AbstractChair:
+        return ModernChairProduct()
+    
+    def CreateCoffeeTable(self) -> AbstractCoffeeTable:
+        return ModernCoffeeProduct()
+    
+    def CreateSofa(self) -> AbstractSofa:
+        return ModernCreateSofa()
+
+###########################################################################################
+"""
+ABSTRACT CLASS FOR AbstractChair
+"""
+
+class AbstractChair:
+
+    def chair_function(self)->str:
         pass
 
-    def another_useful_function(self, collab: AbstractProductA) -> None:
+###########################################################################################
+
+class VictorianChairProduct(AbstractChair):
+
+    def chair_function(self) -> str:
+        return "Victorian Chair"
+
+class ModernChairProduct(AbstractChair):
+
+    def chair_function(self) -> str:
+        return "Modern Chair"
+    
+###########################################################################################
+"""
+ABSTRACT CLASS FOR AbstractCoffeeTable
+"""
+
+class AbstractCoffeeTable:
+
+    def coffeetable_function(self)->str:
         pass
+
+    def another_coffee_table_function(self,collab:AbstractChair)->str:
+        pass
+        
+###########################################################################################
+class VictorianCoffeeProduct(AbstractCoffeeTable):
+
+    def coffeetable_function(self) -> str:
+        return "Victorian Coffee"
     
-class ConcreteProduct_B1(AbstractProductB):
+    def another_coffee_table_function(self, collab: AbstractChair) -> str:
+        result = collab.chair_function()
+        return f"Victorian Coffee table is to be bought with {result}"
+
+class ModernCoffeeProduct(AbstractCoffeeTable):
+
+    def coffeetable_function(self) -> str:
+        return "Modern Coffee"
     
-    def useful_function_b(self)-> str:
-        return "The result of the product B1"
+    def another_coffee_table_function(self, collab: AbstractChair) -> str:
+        result = collab.chair_function()
+        return f"Modern Coffee table is to be bought with {result}"
+
+###########################################################################################
+"""
+ABSTRACT CLASS FOR AbstractSofa
+"""
+
+class AbstractSofa:
+
+    def sofa_function(self)->str:
+        pass
+
+    def another_sofa_function(self,collab:AbstractCoffeeTable)->str:
+        pass
+
+        
+###########################################################################################
     
-    def another_useful_function(self,collab:AbstractProductA)->str:
-        result = collab.useful_function_a()
-        return f"The result of the B1 collaboratiing with the {result}"
+class VictorianCreateSofa:
+
+    def sofa_function(self)->str:
+        return "Victorian Sofa"
     
-class ConcreteProduct_B2(AbstractProductB):
-    def useful_function_b(self)-> str:
-        return "The reusltof the product B2"
+    def another_sofa_function(self,collab:AbstractCoffeeTable)->str:
+        result = collab.sofa_function()
+        return f"Victorian sofa is to be bought with {result}"
+
+class ModernCreateSofa:
+
+    def sofa_function(self)->str:
+        return "Modern Sofa"
     
-    def another_useful_function(self,collab:AbstractProductA)->str:
-        result = collab.useful_function_a()
-        return f"The result of the B2 collaborating with the {result}"
+    def another_sofa_function(self,collab:AbstractCoffeeTable)->str:
+        result = collab.sofa_function()
+        return f"Modern sofa is to be bought with {result}"
+
+###########################################################################################
     
+def client_code(factory: AbstractFactory) -> None:
 
-def client_code(factory:AbstractFactory)->None:
+    product_a = factory.CreateChair()
+    product_b = factory.CreateCoffeeTable()
+    product_c = factory.CreateSofa()
 
-    product_a = factory.CreateProduct_A()
-    product_b = factory.CreateProduct_B()
+    print(product_a.chair_function())
+    print(product_b.another_coffee_table_function(product_a))
+    print(product_c.sofa_function())
 
-    print(f"{product_b.useful_function_b()}")
-    print(f"{product_b.another_useful_function(product_a)}",end ="")
 
-if __name__ == "__main__":
+print("Client: I want everything from VictoriaFurniture")
+client_code(VictorianFurnitureFactory())
+print("\n")
 
-    print("Client:Testing the client code with the first factory type:")
-    client_code(ConcreteFactory1())
+print("Client: I want everything from ModernFurniture")
+client_code(ModernFurnitureFactory())
 
-    print("\n")
-
-    print("Client:Testing the same client code with the second factory type:")
-    client_code(ConcreteFactory2())
 
 
